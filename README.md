@@ -1,9 +1,9 @@
 # Projet_Algos_Graphes
 Projet Efrei – réalisé par __CARDON__ et __BILQUEZ-CYRILLE__
 
-##📚 Algorithmes implémentés
+## 📚 Algorithmes implémentés
 
-🔹 <ins>Sowen </ins>
+🔹 <ins>Sowen</ins>
 
 BFS (Breadth-First Search)
 
