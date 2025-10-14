@@ -3,7 +3,7 @@ Projet Efrei – réalisé par __CARDON__ et __BILQUEZ-CYRILLE__
 
 ## 📚 Algorithmes implémentés
 
-🔹 <ins>Sowen</ins>
+<ins>🔹 Sowen</ins>
 
 BFS (Breadth-First Search)
 
@@ -11,7 +11,7 @@ Kruskal
 
 Bellman-Ford
 
-🔹 <ins>Eyci</ins>
+<ins>🔹 Eyci</ins>
 
 DFS (Depth-First Search)
 
@@ -19,7 +19,7 @@ Prim
 
 Floyd–Warshall
 
-🚧 À faire
+<ins>🚧 À faire</ins>
 
 Dijkstra
 
