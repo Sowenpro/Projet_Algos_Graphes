@@ -1,8 +1,8 @@
 # Projet_Algos_Graphes
-Projet Efrei – réalisé par CARDON et BILQUEZ-CYRILLE
+Projet Efrei – réalisé par __CARDON__ et __BILQUEZ-CYRILLE__
 
-📚 Algorithmes implémentés
-🔹 Sowen
+##📚 Algorithmes implémentés
+🔹 <ins>Sowen </ins>
 
 BFS (Breadth-First Search)
 
@@ -10,7 +10,7 @@ Kruskal
 
 Bellman-Ford
 
-🔹 Eyci
+🔹 <ins>Eyci</ins>
 
 DFS (Depth-First Search)
 
