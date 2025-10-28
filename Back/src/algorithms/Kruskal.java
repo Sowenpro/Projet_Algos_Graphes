@@ -30,7 +30,7 @@ public class Kruskal {
             Node v = edge.getTarget();
 
             //si les sommets ne se connecte pas, on relie
-            if(uf.find(u) == uf.find(v)) {
+            if (uf.find(u) != uf.find(v)) {
                 uf.union(u, v);
                 ACPM.add(edge);
             }

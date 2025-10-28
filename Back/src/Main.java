@@ -37,6 +37,7 @@ public class Main {
 
         // We can start from any city, e.g., "Rennes"
         Map<String, Object> mstResult = Prim.prim(roadNetwork, "Rennes");
+        @SuppressWarnings("unchecked")
         List<Edge> mstEdges = (List<Edge>) mstResult.get("edges");
         double totalCost = (double) mstResult.get("totalWeight");
 
@@ -47,6 +48,24 @@ public class Main {
         }
         System.out.println("Coût total du réseau minimal: " + totalCost);
 
+        // --- Part II: Arbre couvrant de poids minimum (Kruskal) ---
+        System.out.println("\n\n--- Part II: Arbre couvrant de poids minimum (Kruskal) ---");
+
+        List<Edge> kruskalMst = Kruskal.traverse(roadNetwork);
+        double kruskalTotal = 0.0;
+
+        System.out.println("Réseau routier minimal (Kruskal) :");
+        if (kruskalMst.isEmpty()) {
+            System.out.println("Aucune arête dans l'ACPM (Kruskal) — vérifie le graphe ou l'implémentation.");
+        } else {
+            for (Edge e : kruskalMst) {
+                System.out.println(" - " + e.getSource().getId() + " -- " + e.getTarget().getId() +
+                        " (Coût: " + e.getWeight() + ")");
+                kruskalTotal += e.getWeight();
+            }
+            System.out.println("Coût total du réseau minimal (Kruskal): " + kruskalTotal);
+        }
+
         // --- Part III: Recherche du chemin optimal (Dijkstra) ---
         System.out.println("\n\n--- Part III: Plus court chemin (Dijkstra) ---");
         String depart = "Bordeaux";
@@ -55,6 +74,7 @@ public class Main {
 
         Map<String, Object> dijkstraResult = Dijkstra.dijkstra(roadNetwork, depart, arrivee);
         double distance = (double) dijkstraResult.get("distance");
+        @SuppressWarnings("unchecked")
         List<Node> path = (List<Node>) dijkstraResult.get("path");
 
         if (distance == Double.POSITIVE_INFINITY) {
@@ -96,6 +116,20 @@ public class Main {
                 }
             }
             System.out.println();
+        }
+
+        // --- Part V: Plus courts chemins depuis une source (Bellman-Ford) ---
+        System.out.println("\n\n--- Part V: Plus courts chemins depuis une source (Bellman-Ford) ---");
+        String bfSource = "Rennes";
+        try {
+            Map<Node, Double> distances = BellmanFord.shortestPaths(roadNetwork, bfSource);
+
+            System.out.println("Distances depuis " + bfSource + " :");
+            for (Map.Entry<Node, Double> entry : distances.entrySet()) {
+                System.out.println(" - " + entry.getKey().getId() + " = " + entry.getValue());
+            }
+        } catch (RuntimeException ex) {
+            System.out.println("Erreur (Bellman-Ford) : " + ex.getMessage());
         }
     }
 }
