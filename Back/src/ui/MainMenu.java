@@ -23,7 +23,6 @@ public class MainMenu {
 
         // Actions
         showGraphButton.setOnAction(e -> {
-            System.out.println("Affichage du graphe (à implémenter)");
             GraphView graphView = new GraphView(stage);
             // Utiliser une scène plus grande pour le graphe
             Scene scene = new Scene(graphView.getView(), 800, 700);
