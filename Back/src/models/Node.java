@@ -5,9 +5,6 @@ import java.util.List;
 
 public class Node {
     private final String id;
-    /*
-    private double x, y; // Position (utile pour l'affichage)
-     */
     private final List<Edge> edges;
 
     public Node(String id) {

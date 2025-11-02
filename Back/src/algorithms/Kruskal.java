@@ -9,10 +9,14 @@ import java.util.*;
 public class Kruskal {
 
     /**
-     * Algorithme de Kruskal pour trouver l'arbre couvrant de poids minimum (ACPM).
+     * Implémente l'algorithme de Kruskal pour trouver l'Arbre Couvrant
+     * de Poids Minimum (ACPM) d'un graphe.
      *
-     * @param graph   Le graphe à parcourir
-     * @return Une liste des nœuds visités représentant l'ACPM (arbre couvrant de poids minimum)
+     * L'algorithme trie toutes les arêtes par poids croissant, puis les ajoute
+     * à l'arbre si elles ne forment pas un cycle (vérifié avec Union-Find).
+     *
+     * @param graph   Le graphe (non-dirigé) à traiter.
+     * @return Une liste d'arêtes (List<Edge>) représentant l'ACPM.
      */
     public static List<Edge> traverse(Graph graph) {
         List<Edge> ACPM = new ArrayList<>();

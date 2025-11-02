@@ -5,61 +5,65 @@ import models.*;
 
 public class FloydWarshall {
     /**
-     * Implements the Floyd-Warshall algorithm to find all-pairs shortest paths.
+     * Implémente l'algorithme de Floyd-Warshall.
      *
-     * @param graph The graph to process.
-     * @return A map (matrix) where keys are source IDs, and values are maps
-     * of destination IDs to their shortest path cost.
+     * Cet algorithme trouve les plus courts chemins entre TOUTES les paires
+     * de nœuds dans un graphe pondéré. Il gère les poids négatifs (mais
+     * lèvera une exception s'il y a un cycle négatif, bien que cette
+     * implémentation ne le détecte pas explicitement).
+     *
+     * @param graph Le graphe à traiter.
+     * @return Une Map (représentant une matrice) où les clés sont les ID des sources,
+     * et les valeurs sont des Maps (ID de destination -> coût du plus court chemin).
      */
     public static Map<String, Map<String, Double>> floydWarshall(Graph graph) {
-        // This map will hold our distance matrix: dist.get(source).get(target)
+        // Cette map contiendra notre matrice de distances : dist.get(source).get(target)
         Map<String, Map<String, Double>> dist = new HashMap<>();
 
-        // Get all node IDs in a fixed, sorted order for iteration
+        // Obtenir tous les ID de nœuds dans un ordre fixe
         List<String> nodeIds = new ArrayList<>();
         for (Node n : graph.getNodes()) {
             nodeIds.add(n.getId());
         }
-        Collections.sort(nodeIds); // Ensures consistent order
+        Collections.sort(nodeIds); // Assure un ordre cohérent
 
-        // 1. Initialize the distance matrix
+        // 1. Initialiser la matrice de distances
         for (String id1 : nodeIds) {
             Map<String, Double> innerMap = new HashMap<>();
             for (String id2 : nodeIds) {
                 if (id1.equals(id2)) {
-                    innerMap.put(id2, 0.0); // Distance to self is 0
+                    innerMap.put(id2, 0.0); // Distance à soi-même = 0
                 } else {
-                    innerMap.put(id2, Double.POSITIVE_INFINITY); // No path known yet
+                    innerMap.put(id2, Double.POSITIVE_INFINITY); // Aucun chemin connu
                 }
             }
             dist.put(id1, innerMap);
         }
 
-        // 2. Populate the matrix with direct edge weights
+        // 2. Remplir la matrice avec les poids des arêtes directes
         for (Node sourceNode : graph.getNodes()) {
             String sourceId = sourceNode.getId();
             for (Edge edge : sourceNode.getEdges()) {
                 String targetId = edge.getTarget().getId();
-                // We use getWeight() directly because our graph is now "undirected"
-                // (has edges in both directions)
+                // On utilise getWeight() directement
                 dist.get(sourceId).put(targetId, edge.getWeight());
             }
         }
 
-        // 3. The core Floyd-Warshall algorithm
-        // Iterate through all nodes 'k' as potential intermediate nodes
+        // 3. Cœur de l'algorithme Floyd-Warshall
+        // Itérer sur tous les nœuds 'k' comme intermédiaires potentiels
         for (String k : nodeIds) {
-            // For every source node 'i'
+            // Pour chaque nœud source 'i'
             for (String i : nodeIds) {
-                // For every destination node 'j'
+                // Pour chaque nœud de destination 'j'
                 for (String j : nodeIds) {
                     double distIK = dist.get(i).get(k);
                     double distKJ = dist.get(k).get(j);
                     double distIJ = dist.get(i).get(j);
 
-                    // If the path from i to j through k is shorter
+                    // Si le chemin de i à j en passant par k est plus court
                     if (distIK + distKJ < distIJ) {
-                        // Update the shortest path
+                        // Mettre à jour le plus court chemin
                         dist.get(i).put(j, distIK + distKJ);
                     }
                 }

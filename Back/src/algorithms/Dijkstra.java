@@ -27,12 +27,19 @@ public class Dijkstra {
     }
 
     /**
-     * Implémente l'algorithme de Dijkstra pour trouver le plus court chemin.
+     * Implémente l'algorithme de Dijkstra pour trouver le plus court chemin
+     * entre deux nœuds dans un graphe pondéré (avec poids positifs).
      *
      * @param graph       Le graphe sur lequel chercher.
      * @param startNodeId La ville de départ.
      * @param endNodeId   La ville d'arrivée.
-     * @return Une carte contenant le "chemin" (List<Node>) et la "distance" (Double).
+     *
+     * @return Une carte contenant deux entrées :
+     * - "path" (List<Node>): Le chemin le plus court (liste de nœuds).
+     * - "distance" (Double): La distance totale du chemin.
+     *
+     * Retourne une carte vide ou un chemin vide si les nœuds sont introuvables
+     * ou si aucun chemin n'existe.
      */
     public static Map<String, Object> dijkstra(Graph graph, String startNodeId, String endNodeId) {
         Node startNode = graph.getNode(startNodeId);

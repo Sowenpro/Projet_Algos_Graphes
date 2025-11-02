@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import ui.AlgoView.*;
 
 public class AlgoMenu {
 
@@ -19,7 +20,7 @@ public class AlgoMenu {
         // Boutons pour les algos
         Button bfsBtn = new Button("BFS");
         Button dfsBtn = new Button("DFS");
-        Button primBtn = new Button("Prim");
+        //Button primBtn = new Button("Prim");
         Button kruskalBtn = new Button("Kruskal");
         Button dijkstraBtn = new Button("Dijkstra");
         Button bellmanBtn = new Button("Bellman-Ford");
@@ -27,7 +28,7 @@ public class AlgoMenu {
         Button backBtn = new Button("⬅ Retour");
 
         // Style uniforme
-        for (Button b : new Button[]{bfsBtn, dfsBtn, primBtn, kruskalBtn, dijkstraBtn, bellmanBtn, floydBtn}) {
+        for (Button b : new Button[]{bfsBtn, dfsBtn, kruskalBtn, dijkstraBtn, bellmanBtn, floydBtn}) {
             b.setStyle("-fx-pref-width: 180; -fx-font-size: 14px;");
         }
         backBtn.setStyle("-fx-font-size: 13px; -fx-text-fill: red;");
@@ -38,13 +39,45 @@ public class AlgoMenu {
             stage.setScene(new Scene(mainMenu.getView(), 600, 400));
         });
 
-        bfsBtn.setOnAction(e -> System.out.println("Lancement BFS..."));
-        dfsBtn.setOnAction(e -> System.out.println("Lancement DFS..."));
-        primBtn.setOnAction(e -> System.out.println("Lancement Prim..."));
-        kruskalBtn.setOnAction(e -> System.out.println("Lancement Kruskal..."));
-        dijkstraBtn.setOnAction(e -> System.out.println("Lancement Dijkstra..."));
-        bellmanBtn.setOnAction(e -> System.out.println("Lancement Bellman-Ford..."));
-        floydBtn.setOnAction(e -> System.out.println("Lancement Floyd-Warshall..."));
+
+        bfsBtn.setOnAction(e -> {
+            BFSView bfsView = new BFSView(stage);
+            Scene scene = new Scene(bfsView.getView(), 800, 700);
+            stage.setScene(scene);
+        });
+
+        dfsBtn.setOnAction(e -> {
+            DFSView dfsView = new DFSView(stage); // <-- MODIFIÉ
+            Scene scene = new Scene(dfsView.getView(), 800, 700);
+            stage.setScene(scene);
+        });
+
+        //primBtn.setOnAction(e -> System.out.println("Lancement Prim..."));
+
+
+        kruskalBtn.setOnAction(e -> {
+            KruskalView kruskalView = new KruskalView(stage);
+            Scene scene = new Scene(kruskalView.getView(), 800, 700);
+            stage.setScene(scene);
+        });
+
+        dijkstraBtn.setOnAction(e -> {
+            DijkstraView dijkstraView = new DijkstraView(stage);
+            Scene scene = new Scene(dijkstraView.getView(), 800, 700);
+            stage.setScene(scene);
+        });
+
+        bellmanBtn.setOnAction(e -> {
+            BellmanFordView bellmanFordView = new BellmanFordView(stage);
+            Scene scene = new Scene(bellmanFordView.getView(), 800, 700);
+            stage.setScene(scene);
+        });
+
+        floydBtn.setOnAction(e -> {
+            FloydWarshallView floydView = new FloydWarshallView(stage); //
+            Scene scene = new Scene(floydView.getView(), 600, 500); //
+            stage.setScene(scene);
+        });
 
         // Organisation
         GridPane grid = new GridPane();
@@ -53,9 +86,9 @@ public class AlgoMenu {
         grid.setVgap(15);
 
         grid.addRow(0, bfsBtn, dfsBtn);
-        grid.addRow(1, primBtn, kruskalBtn);
-        grid.addRow(2, dijkstraBtn, bellmanBtn);
-        grid.addRow(3, floydBtn);
+        //grid.addRow(1, primBtn, kruskalBtn);
+        grid.addRow(1, kruskalBtn, dijkstraBtn);
+        grid.addRow(2, bellmanBtn, floydBtn);
 
         view = new VBox(25, title, grid, backBtn);
         view.setAlignment(Pos.CENTER);

@@ -24,7 +24,10 @@ public class MainMenu {
         // Actions
         showGraphButton.setOnAction(e -> {
             System.out.println("Affichage du graphe (à implémenter)");
-            // TODO : ouvrir une scène ou un Canvas affichant le graphe
+            GraphView graphView = new GraphView(stage);
+            // Utiliser une scène plus grande pour le graphe
+            Scene scene = new Scene(graphView.getView(), 800, 700);
+            stage.setScene(scene);
         });
 
         algoMenuButton.setOnAction(e -> {
