@@ -20,7 +20,7 @@ public class AlgoMenu {
         // Boutons pour les algos
         Button bfsBtn = new Button("BFS");
         Button dfsBtn = new Button("DFS");
-        //Button primBtn = new Button("Prim");
+        Button primBtn = new Button("Prim");
         Button kruskalBtn = new Button("Kruskal");
         Button dijkstraBtn = new Button("Dijkstra");
         Button bellmanBtn = new Button("Bellman-Ford");
@@ -28,7 +28,7 @@ public class AlgoMenu {
         Button backBtn = new Button("⬅ Retour");
 
         // Style uniforme
-        for (Button b : new Button[]{bfsBtn, dfsBtn, kruskalBtn, dijkstraBtn, bellmanBtn, floydBtn}) {
+        for (Button b : new Button[]{bfsBtn, dfsBtn, primBtn, kruskalBtn, dijkstraBtn, bellmanBtn, floydBtn}) {
             b.setStyle("-fx-pref-width: 180; -fx-font-size: 14px;");
         }
         backBtn.setStyle("-fx-font-size: 13px; -fx-text-fill: red;");
@@ -39,7 +39,6 @@ public class AlgoMenu {
             stage.setScene(new Scene(mainMenu.getView(), 600, 400));
         });
 
-
         bfsBtn.setOnAction(e -> {
             BFSView bfsView = new BFSView(stage);
             Scene scene = new Scene(bfsView.getView(), 800, 700);
@@ -47,13 +46,16 @@ public class AlgoMenu {
         });
 
         dfsBtn.setOnAction(e -> {
-            DFSView dfsView = new DFSView(stage); // <-- MODIFIÉ
+            DFSView dfsView = new DFSView(stage);
             Scene scene = new Scene(dfsView.getView(), 800, 700);
             stage.setScene(scene);
         });
 
-        //primBtn.setOnAction(e -> System.out.println("Lancement Prim..."));
-
+        primBtn.setOnAction(e -> {
+            PrimView primView = new PrimView(stage);
+            Scene scene = new Scene(primView.getView(), 800, 700);
+            stage.setScene(scene);
+        });
 
         kruskalBtn.setOnAction(e -> {
             KruskalView kruskalView = new KruskalView(stage);
@@ -74,8 +76,8 @@ public class AlgoMenu {
         });
 
         floydBtn.setOnAction(e -> {
-            FloydWarshallView floydView = new FloydWarshallView(stage); //
-            Scene scene = new Scene(floydView.getView(), 600, 500); //
+            FloydWarshallView floydView = new FloydWarshallView(stage);
+            Scene scene = new Scene(floydView.getView(), 600, 500);
             stage.setScene(scene);
         });
 
@@ -86,9 +88,9 @@ public class AlgoMenu {
         grid.setVgap(15);
 
         grid.addRow(0, bfsBtn, dfsBtn);
-        //grid.addRow(1, primBtn, kruskalBtn);
-        grid.addRow(1, kruskalBtn, dijkstraBtn);
-        grid.addRow(2, bellmanBtn, floydBtn);
+        grid.addRow(1, primBtn, kruskalBtn);
+        grid.addRow(2, dijkstraBtn, bellmanBtn);
+        grid.addRow(3, floydBtn);
 
         view = new VBox(25, title, grid, backBtn);
         view.setAlignment(Pos.CENTER);
